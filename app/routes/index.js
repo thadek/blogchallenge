@@ -10,6 +10,8 @@ router.get('/',(req,res)=>{
 })
 
 //Post Routes 
+router.get('/posts',PostController.getPosts)
+
 //router.post('/posts',)
 
 module.exports = router;

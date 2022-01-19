@@ -10,8 +10,8 @@ const getPagination = (page) => {
 
 const getPosts = (page) =>{
 try{
-    rp.findWithPagination(getPagination(page)).then(repoResponse=>{
-        if(repoResponse) return responseHandler(200,repoResponse)
+ return rp.findWithPagination(getPagination(page)).then(repoResponse=>{
+        if(repoResponse.count>0) return responseHandler(200,repoResponse.rows)
         else return responseHandler(404,"No posts")
     })
 

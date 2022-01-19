@@ -9,7 +9,10 @@ class PostRepository extends Repository {
         this.model = Post;
     }
 
-  //findWithPagination
+    findWithPagination({limit,offset}){
+        const attributes = ['id','title','imageURL','createdAt']
+        return this.model.findAndCountAll({attributes,limit,offset})
+    }
 
 }
 

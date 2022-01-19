@@ -24,8 +24,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      CategoryId:{
+        type:Sequelize.INTEGER
       }
+
     });
+
+    
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Posts');

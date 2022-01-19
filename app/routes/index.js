@@ -9,4 +9,7 @@ router.get('/',(req,res)=>{
     res.json({msg:'Blog App working :) - Gabi - Alkemy warm up'})
 })
 
-//Post Routes
+//Post Routes 
+//router.post('/posts',)
+
+module.exports = router;

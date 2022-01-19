@@ -35,15 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    creationDate: {
-      type:DataTypes.DATE,
-      allowNull:false,
-      validate:{
-        notNull:{
-          msg:`creationDate can't be null.`
-        }
-      }
-    }
   }, {
     sequelize,
     modelName: 'Post',

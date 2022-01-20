@@ -14,8 +14,14 @@ DB_NAME=
 PORT=
 ```
 
-#### 3) Run.
+#### 3) Run db:create, migrations and finally seeds.
 ```bash
+npx sequelize-cli db:create
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+```
+#### 4) Run.
+```
 npm run dev
 ```
 

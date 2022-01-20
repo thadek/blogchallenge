@@ -21,4 +21,16 @@ router.patch('/posts/:id',PostController.updatePost)
 router.delete('/posts/:id',PostController.deletePost)
 
 
+//Categories Routes
+//Get
+router.get('/categories',CategoryController.getCategories)
+router.get('/categories/:id',CategoryController.getCategory)
+//Post
+router.post('/categories',CategoryController.createCategory)
+//Patch
+router.patch('/categories/:id',CategoryController.updateCategory)
+//Delete
+router.delete('/categories/:id',CategoryController.deleteCategory)
+
+
 module.exports = router;

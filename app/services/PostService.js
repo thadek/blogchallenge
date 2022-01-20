@@ -38,13 +38,18 @@ const getPostById = async (id) => {
 }
 
 const updatePost = async (id,post) => {
+    const { createdAt, CategoryId } = post;
     if (!validator.isInt(id)) return responseHandler(400, "Invalid id, only numbers.")
     post.id = +id;
     const postFetched = await rp.findById(post.id)
     if(!postFetched) return responseHandler(404,`Post with id ${post.id} doesn't exists.`)
-    if(post.createdAt) return responseHandler(400,"createdAt is readonly field, can't update.")
+    if(createdAt) return responseHandler(400,"createdAt is readonly field, can't update.")
+    if(CategoryId){
+    const category = await catrp.findById(CategoryId)
+    if(!category) return responseHandler(404,`Category with id ${CategoryId} doesn't exists.`)
+    }
     return postFetched.update(post).then(repoResponse=>{
-        if(repoResponse) return responseHandler(200,{updated:repoResponse})
+        return responseHandler(200,{updated:repoResponse})
         //else return responseHandler(200,{response:`No changes in post with id ${id}.`})
     })
 
@@ -52,7 +57,7 @@ const updatePost = async (id,post) => {
 
 const deletePostById = async (id) => {
     if (!validator.isInt(id)) return responseHandler(400, "Invalid id, only numbers.")
-    else return rp.deleteById(id).then(repoResponse => {
+    return rp.deleteById(id).then(repoResponse => {
         if (repoResponse == 0) return responseHandler(404, `Can't find post with id ${id}.`)
         return responseHandler(200, {response:`Post with id ${id} deleted.`})
     }).catch(err => { return responseHandler(500, err) })

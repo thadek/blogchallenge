@@ -11,7 +11,7 @@ class PostRepository extends Repository {
 
     findWithPagination({limit,offset}){
         const attributes = ['id','title','imageURL','createdAt']
-        return this.model.findAndCountAll({attributes,limit,offset})
+        return this.model.findAndCountAll({attributes,order:[['createdAt','DESC']],limit,offset})
     }
 
 }

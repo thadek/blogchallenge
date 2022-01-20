@@ -32,12 +32,30 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notNull:{
           msg:`imageURL can't be null.`
-        }
+        },
+        is:{
+          args: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/ ,
+          msg:'invalid imageURL.'
+        } 
       }
     },
   }, {
     sequelize,
+    updatedAt: false,
     modelName: 'Post',
   });
+
+  Post.beforeCreate(async (post, options)=>{
+    post.createdAt = new Date();
+    if(!post.CategoryId) throw new Error('CategoryId is required.')
+  })
+
+  Post.beforeUpdate(async (post, options)=>{
+    if(!post.CategoryId) throw new Error('CategoryId is required.')
+    const postFetched = await Post.findByPk(post.id)
+    if(!postFetched) throw new Error(`Post with id ${post.id} doesn't exists.`)
+  })
+
+
   return Post;
 };
